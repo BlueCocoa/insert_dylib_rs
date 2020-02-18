@@ -6,7 +6,7 @@ macro_rules! swap_bytes {
     };
 }
 
-pub trait FixLoadCommandEndian {
+pub trait FixMachOStructEndian {
     fn fix_endian(&mut self);
 }
 
@@ -41,7 +41,7 @@ impl FatHeader {
     }
 }
 
-impl FixLoadCommandEndian for FatHeader {
+impl FixMachOStructEndian for FatHeader {
     fn fix_endian(&mut self) {
         swap_bytes!(self, magic);
         swap_bytes!(self, nfat_arch);
@@ -88,7 +88,7 @@ impl FatArch {
     }
 }
 
-impl FixLoadCommandEndian for FatArch {
+impl FixMachOStructEndian for FatArch {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cputype);
         swap_bytes!(self, cpusubtype);
@@ -164,7 +164,7 @@ impl MachHeader {
     }
 }
 
-impl FixLoadCommandEndian for MachHeader {
+impl FixMachOStructEndian for MachHeader {
     fn fix_endian(&mut self) {
         swap_bytes!(self, magic);
         swap_bytes!(self, cputype);
@@ -257,7 +257,7 @@ impl SegmentCommand {
     }
 }
 
-impl FixLoadCommandEndian for SegmentCommand {
+impl FixMachOStructEndian for SegmentCommand {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);
@@ -362,7 +362,7 @@ impl SegmentCommand64 {
     }
 }
 
-impl FixLoadCommandEndian for SegmentCommand64 {
+impl FixMachOStructEndian for SegmentCommand64 {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);
@@ -399,7 +399,7 @@ impl LoadCommand {
     }
 }
 
-impl FixLoadCommandEndian for LoadCommand {
+impl FixMachOStructEndian for LoadCommand {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);
@@ -433,7 +433,7 @@ impl LinkeditDataCommand {
     }
 }
 
-impl FixLoadCommandEndian for LinkeditDataCommand {
+impl FixMachOStructEndian for LinkeditDataCommand {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);
@@ -450,7 +450,7 @@ pub struct Dylib {
     pub compatibility_version: u32,
 }
 
-impl FixLoadCommandEndian for Dylib {
+impl FixMachOStructEndian for Dylib {
     fn fix_endian(&mut self) {
         swap_bytes!(self, name_offset);
         swap_bytes!(self, timestamp);
@@ -518,7 +518,7 @@ impl DylibCommand {
     }
 }
 
-impl FixLoadCommandEndian for DylibCommand {
+impl FixMachOStructEndian for DylibCommand {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);
@@ -569,7 +569,7 @@ impl SymtabCommand {
     }
 }
 
-impl FixLoadCommandEndian for SymtabCommand {
+impl FixMachOStructEndian for SymtabCommand {
     fn fix_endian(&mut self) {
         swap_bytes!(self, cmd);
         swap_bytes!(self, cmdsize);

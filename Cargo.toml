@@ -1,0 +1,8 @@
+[package]
+name = "insert_dylib_rs"
+version = "0.1.0"
+authors = ["Cocoa <0xbbc@0xbbc.com>"]
+edition = "2018"
+
+[dependencies]
+clap = "2"

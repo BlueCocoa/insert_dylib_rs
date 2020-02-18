@@ -144,7 +144,7 @@ fn main() -> std::io::Result<()> {
             }
         }
         _ => {
-            eprintln!("Not a MachO binary: {}", options.binary_path);
+            println!("Not a MachO binary: {}", options.binary_path);
         }
     }
 
@@ -166,7 +166,7 @@ fn insert_dylib(
     match mach_header.magic {
         MH_CIGAM_64 | MH_MAGIC_64 | MH_CIGAM | MH_MAGIC => (),
         _ => {
-            eprintln!("Unknown MachO header magic: {:08x}", mach_header.magic);
+            println!("Unknown MachO header magic: {:08x}", mach_header.magic);
         }
     }
 
@@ -183,7 +183,7 @@ fn insert_dylib(
         return Ok(true);
     }
 
-    let path_padding = 8 as u32;
+    let path_padding = 8u32;
     let dylib_path_len = options.dylib_path.len() as u32;
     let dylib_path_size = (dylib_path_len & !(path_padding - 1)) + path_padding;
     let cmdsize: u32 = dylib_path_size + DylibCommand::len() as u32;
@@ -334,7 +334,7 @@ fn check_load_commands(
 
                                         binary_file.write_all(&symtab.to_u8())?;
                                     } else {
-                                        eprintln!("Warning: String table doesn't appear right before code signature. codesign might not work on the patched binary. {:016x}", diffsize);
+                                        println!("Warning: String table doesn't appear right before code signature. codesign might not work on the patched binary. {:016x}", diffsize);
                                     }
                                 }
 

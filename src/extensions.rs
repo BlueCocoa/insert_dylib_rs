@@ -4,9 +4,13 @@ use std::io::prelude::*;
 use std::io::SeekFrom;
 
 pub trait InsertDylibFileExt {
+    /// Read exactly `buf.len()` bytes and then rewind the file cursor `buf.len()` bytes
     fn fpeek(&mut self, buf: &mut [u8]) -> io::Result<()>;
+    /// Overwrite `len` zeros to file starting from `offset` (from beginning)
     fn fbzero(&mut self, offset: u64, len: u64) -> io::Result<()>;
+    /// memmove alike, but on file
     fn fmemmove(&mut self, dst: u64, src: u64, len: u64) -> io::Result<()>;
+    /// Get current file cursor position
     fn ftello(&mut self) -> u64;
 }
 

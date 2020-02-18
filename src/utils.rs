@@ -4,7 +4,7 @@ use clap::{App, Arg};
 
 pub fn parse_arg() -> Opts {
     let matches = App::new("Insert Dylib")
-        .version("1.0")
+        .version("0.1.0")
         .author("Cocoa <0xbbc@0xbbc.com>")
         .about("Insert dylib into Mach-O binary")
         .arg(
@@ -36,25 +36,25 @@ pub fn parse_arg() -> Opts {
             Arg::with_name("weak")
                 .long("weak")
                 .multiple(false)
-                .help("sets LC_LOAD_WEAK_DYLIB"),
+                .help("Sets LC_LOAD_WEAK_DYLIB"),
         )
         .arg(
             Arg::with_name("overwrite")
                 .long("overwrite")
                 .multiple(false)
-                .help("overwrite existent file"),
+                .help("Overwrite existent file"),
         )
         .arg(
             Arg::with_name("strip_codesign")
                 .long("strip-codesign")
                 .multiple(false)
-                .help("strip codesign"),
+                .help("Strip codesign"),
         )
         .arg(
             Arg::with_name("all_yes")
                 .long("all-yes")
                 .multiple(false)
-                .help("yes to all"),
+                .help("Yes to all"),
         )
         .get_matches();
 

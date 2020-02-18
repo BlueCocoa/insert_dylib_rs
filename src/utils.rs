@@ -48,7 +48,7 @@ pub fn parse_arg() -> Opts {
             Arg::with_name("strip_codesign")
                 .long("strip-codesign")
                 .multiple(false)
-                .help("overwrite existent file"),
+                .help("strip codesign"),
         )
         .arg(
             Arg::with_name("all_yes")
